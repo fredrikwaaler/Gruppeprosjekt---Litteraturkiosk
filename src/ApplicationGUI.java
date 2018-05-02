@@ -24,7 +24,9 @@ public class ApplicationGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         BorderPane rootNode = new BorderPane();
-
+//monstrosity
+        System.out.println("he");
+        
         VBox buttonMenu = new VBox();
         buttonMenu.setPrefWidth(150);
         Button addBtn = new Button("Add Print");
