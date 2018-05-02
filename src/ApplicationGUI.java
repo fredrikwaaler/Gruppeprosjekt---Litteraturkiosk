@@ -10,12 +10,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
 
 public class ApplicationGUI extends Application {
 
     private final Register printRegister = new Register();
-    private TextArea mainWindow;
-
+    private final StackPane mainWindow = new StackPane();
 
     public static void main(String[] args) {
         launch(args);
@@ -24,8 +25,6 @@ public class ApplicationGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         BorderPane rootNode = new BorderPane();
-//monstrosity
-        System.out.println("he");
         
         VBox buttonMenu = new VBox();
         buttonMenu.setPrefWidth(150);
@@ -41,9 +40,6 @@ public class ApplicationGUI extends Application {
         removeBtn.setPrefWidth(buttonMenu.getPrefWidth());
         buttonMenu.getChildren().addAll(addBtn, listBtn, searchBtn, convertBtn, removeBtn);
         buttonMenu.setSpacing(10);
-
-        mainWindow = new TextArea();
-        mainWindow.setEditable(false);
 
         rootNode.setCenter(mainWindow);
         rootNode.setLeft(buttonMenu);
@@ -66,8 +62,10 @@ public class ApplicationGUI extends Application {
      * Prints a overview of all the books in the register to the specified textArea.
      * @param window The specified text area to print to.
      */
-    private void listAllPrints(TextArea window)
+    private void listAllPrints(Pane window)
     {
+        clearMainWindow();
+        TextArea textArea = new TextArea();
         String returnString = "";
         Iterator<Print> it = this.printRegister.getPrintsInRegister();
         if (!it.hasNext()) {
@@ -79,8 +77,14 @@ public class ApplicationGUI extends Application {
                 returnString += p.getTitle() + " (" + p.getPublisher() + ")" + "\n";
             }
         }
-        window.setText(returnString);
+        textArea.setText(returnString);
+        window.getChildren().add(textArea);
     }
+
+    private void clearMainWindow() {
+        mainWindow.getChildren().clear();
+    }
+
 
     private void addDemoBooks() {
         this.printRegister.addPrintToRegister(new Book("Harry Potter", "Continium", "J.K Rowling", "1", "24.10.1998"));
