@@ -3,3 +3,12 @@
     -fx-background-color: #bbb;
 }
 
+.GridPane {
+    -fx-padding: 10px;
+    -fx-background-color: White;
+}
+
+#main {
+    -fx-background-color: White;
+}
+
